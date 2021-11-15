@@ -1,4 +1,5 @@
 using authentication.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace authentication.Controllers
@@ -16,6 +17,13 @@ namespace authentication.Controllers
         }
 
         [HttpPost]
+        public IActionResult CreateUser([FromBody] User user)
+        {
+            var result = _userService.CreateUser(user);
+            return new JsonResult(new {user = result}) {StatusCode = StatusCodes.Status200OK};
+        }
+
+        [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody] AuthenticateRequest request)
         {
             var response = _userService.Authenticate(request);
