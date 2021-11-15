@@ -48,7 +48,7 @@ namespace authentication.Services
                 {
                     new Claim("id", user.Id.ToString())
                 }),
-                Expires = DateTime.Now.AddMinutes(60),
+                Expires = DateTime.UtcNow.AddMinutes(60),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)
             };
